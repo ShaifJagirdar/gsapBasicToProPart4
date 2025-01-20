@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cursors</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        html , body{
+            height: 100%;
+            width: 100%;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 1em;
+        }
+        .navbar{
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5vw 3vw;
+        }
+        .navbar .menu{
+            display: flex;
+            gap: 2.5em;
+            font-weight: 400;
+        }
+        .menu h4{
+            font-weight: 500;
+        }
+        .banner{
+            width: 100%;
+            height: 80dvh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-image: url("https://images.unsplash.com/photo-1508252568242-e0f383f753d6?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+            background-position: center;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+        .banner h1{
+            font-size: 4rem;
+            width: 70%;
+            text-align: center;
+            color: #fff;
+        }
+        #cursor{
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            position: fixed;
+            background: transparent;
+            backdrop-filter: grayscale(1) brightness(2);
+            mix-blend-mode: screen; /* Optional */
+            pointer-events: none; /* Ensure it doesn't interfere with pointer events */
+            z-index: 9;
+        }
+         a{
+            padding: 1vw;
+            background-color: #ffffff4b;
+            border-radius: 5px;
+            font-size: 1em;
+            text-decoration: none;
+            color: #fff;
+        }
+        a:hover{
+            background-color: #fff;
+            color:#000
+        }
+        .banner p{
+            text-align: center;
+            width: 70%;
+            padding: 2vw 2vw;
+            margin: 2vw;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.312);  
+            box-shadow: 1px 3px 9px 0px #000; 
+        }
+        .aboutcontent{
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            justify-content: center;
+            background-color:brown;
+            row-gap: 2vw;
+        }
+        .aboutcontent h2{
+
+        }
+    </style>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded",function(){
+            var cursor = document.querySelector("#cursor");
+            var body = document.querySelector("body");
+            body.addEventListener("mousemove",function(dets){
+                console.log("position", dets);
+                gsap.to(cursor,{
+                    x:dets.x,
+                    y:dets.y,
+                    duration: 0.5,
+                    ease: "power1.out"
+                })
+            });
+            var navigation = document.querySelectorAll(".menu h4");
+            navigation.forEach(function(navitems){
+
+                navitems.addEventListener("mouseenter",function(){
+                gsap.to(cursor,{
+                    width: "40px",
+                    height: "40px",
+                    backgroundColor: "rgba(0, 0, 0, 0.312)"
+                });
+            });
+                navitems.addEventListener("mouseleave" ,function(){
+                    gsap.to(cursor,{
+                        width: "15px",
+                        height: "15px",
+                        backgroundColor: "#dfdfdf"
+                    })
+                })
+
+            });
+            var banners = document.querySelector(".banner");
+
+            banners.addEventListener("mouseenter",function(){
+                gsap.to(cursor,{
+                    width: "70px",
+                    height: "70px",
+                })
+            })
+            banners.addEventListener("mouseleave",function(){
+                gsap.to(cursor,{
+                    width: "15px",
+                    height: "15px",
+                })
+            })
+            
+            
+        });
+    </script>
+</head>
+<body>
+    <div id="cursor"></div>
+    <div class="navbar">
+        <div class="logo">
+            <h3>Mouse Cursor demo</h3>
+        </div>
+        <div class="menu">
+            <h4>Home</h4>
+            <h4>About</h4>
+            <h4>Services</h4>
+            <h4>Contact</h4>
+        </div>
+    </div>
+    <div class="banner">
+        <h1>This is banner demo of How cursor works</h1>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perferendis tenetur sunt vero minus culpa laudantium nihil explicabo ab illum incidunt labore, deleniti quos, officiis eum! Porro autem doloremque velit inventore.</p>
+        <a href="#">Get In Touch</a>
+    </div>
+    <div class="aboutcontent">
+        <h2>Demo of About</h2>
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perferendis tenetur sunt vero minus culpa laudantium nihil explicabo ab illum incidunt labore, deleniti quos, officiis eum! Porro autem doloremque velit inventore.</p>
+        <a href="#">Get In Touch</a>
+    </div>
+    
+</body>
+</html>
